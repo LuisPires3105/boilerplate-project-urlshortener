@@ -4,7 +4,6 @@ let bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const dns = require('node:dns');
-const { error } = require('node:console');
 
 var shortedURLs = {};
 var id = 1;
@@ -30,7 +29,7 @@ app.get('/api/hello', function(req, res) {
 app.use(bodyParser.urlencoded({extended: false}))
 
 app.post('/api/shorturl', function(req, res) {
-  //var urlToShorten = req.body.url.slice(7);
+  
   console.log(dns.lookup(new URL(req.body.url).hostname,(err,address,family)=>{
     console.log(`${address} \n ${req.body.url}\n`);
     if(err){
